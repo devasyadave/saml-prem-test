@@ -96,17 +96,6 @@ class DB extends Controller
                 exit;
             }
         }
-//        catch (\Exception $e) {
-//            $code = $e->getCode();
-//            $msg = $e->getMessage();
-//            $trace = $e->getTraceAsString();
-//            //echo " $code \r\n $msg \r\n $trace";
-//            //$env_connection = getenv('DB_CONNECTION');
-//            $env_database = getenv('DB_DATABASE');
-//            $env_host = getenv('DB_HOST');
-//            var_dump($env_database, $env_host);
-//            xiet;
-//        }
         if (empty($result->email))
             return null;
         else
@@ -144,6 +133,8 @@ class DB extends Controller
 
     protected static function startConnection()
     {
+        $path = realpath(__DIR__.'/../../../../laravel/framework/src/Illuminate/Support/helpers.php');
+        include_once $path;
 
         $connection = array(
             'driver' => getenv('DB_CONNECTION'),
@@ -153,12 +144,7 @@ class DB extends Controller
             'username' => getenv('DB_USERNAME'),
             'password' => getenv('DB_PASSWORD')
         );
-        /*
-         * if(Schema::hasTable('mo_admin'))
-         * {echo "has table";exit;}
-         * else
-         * {echo "no table";exit;}
-         */
+
         $Capsule = new ConDB();
         $Capsule->addConnection($connection);
         $Capsule->setAsGlobal(); // this is important. makes the database manager object globally available

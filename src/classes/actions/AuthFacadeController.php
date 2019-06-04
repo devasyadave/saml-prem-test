@@ -21,7 +21,7 @@ class AuthFacadeController extends Controller
 
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/start';
+    protected $redirectTo = '';
 
     public $mailid = '';
 
