@@ -142,7 +142,8 @@ class DB extends Controller
             'port' => getenv('DB_PORT'),
             'database' => getenv('DB_DATABASE'),
             'username' => getenv('DB_USERNAME'),
-            'password' => getenv('DB_PASSWORD')
+            'password' => getenv('DB_PASSWORD'),
+            'collation' => 'default'
         );
 
         $Capsule = new ConDB();
@@ -150,8 +151,7 @@ class DB extends Controller
         $Capsule->setAsGlobal(); // this is important. makes the database manager object globally available
         $Capsule->bootEloquent();
         try {
-
-            if (ConDB::table('mo_config')->get()->first() == NULL) {
+            if (ConDB::table('mo_config')->get() == NULL) {
                 ConDB::table('mo_config')->updateOrInsert([
                     'id' => 1
                 ], [
