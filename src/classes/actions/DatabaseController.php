@@ -14,7 +14,7 @@ class DatabaseController extends Controller
         $migration_path = explode('vendor', __DIR__ . '/../../migrations', 2)[1];
         echo "Setting up database for MiniOrange SAML SP for Laravel...<br>";
         try {
-            Artisan::call('migrate:refresh', array(
+            Artisan::call('migrate', array(
                 '--path' => 'vendor' . $migration_path,
                 '--force' => TRUE
             ));
